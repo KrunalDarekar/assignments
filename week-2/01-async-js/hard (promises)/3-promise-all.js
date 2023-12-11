@@ -5,37 +5,37 @@
  */
 
 
-function waitOneSecond() {
+function wait1(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 1 seconds`)
-        }, 1000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function waitTwoSecond() {
+function wait2(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 2 seconds`)
-        }, 2000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function waitThreeSecond() {
+function wait3(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 3 seconds`)
-        }, 3000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function calculateTime() {
-    const promises = [waitOneSecond(), waitTwoSecond(), waitThreeSecond()]
+function calculateTime(t1, t2, t3) {
+    const promises = [wait1(t1), wait2(t2), wait3(t3)]
     const beforeTime = new Date().getTime();
-    Promise.all(promises).then(() => {
+    return Promise.all(promises).then(() => {
         const afterTime = new Date().getTime();
         const diff = afterTime - beforeTime;
-        console.log(diff);
+        return diff;
     })
 }
 
