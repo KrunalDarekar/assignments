@@ -5,40 +5,51 @@
  * Compare it with the results from 3-promise-all.js
  */
 
-function waitOneSecond() {
+function wait1(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 1 seconds`)
-        }, 1000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function waitTwoSecond() {
+function wait2(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 2 seconds`)
-        }, 2000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function waitThreeSecond() {
+function wait3(t) {
     return new Promise(function(resolve) {
         setTimeout(()=> {
-            resolve(`resolved after 3 seconds`)
-        }, 3000)
+            resolve()
+        }, t*1000)
     })
 }
 
-function calculateTime() {
+function calculateTime(t1, t2, t3) {
     const beforeTime = new Date().getTime();
-    waitOneSecond().then(() => {
-        waitTwoSecond().then(() => {
-            waitThreeSecond().then(() => {
-                const afterTime = new Date().getTime();
-                console.log(beforeTime - afterTime)
-            })
-        })
+    return wait1(t1).then(() =>{
+        return wait2(t2)
+    }).then(() => {
+        return wait3(t3)
+    }).then(() => {
+        const afterTime = new Date().getTime();
+        return afterTime - beforeTime;
     })
 }
+
+// async function calculateTime(t1, t2, t3) {
+//     const beforeTime = new Date().getTime();
+//     const waitOne = await wait1(t1)
+//     const waitTwo = await wait2(t2)
+//     const waitThree = await wait3(t3)
+//     const afterTime = new Date().getTime();
+//     return afterTime - beforeTime;
+// }
+
+// calculateTime(1,2,3)
 
 module.exports = calculateTime;
